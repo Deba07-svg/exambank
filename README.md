@@ -37,3 +37,19 @@ A collection of exam preparation materials for Assam students.
 ## Purpose
 
 This repository helps students prepare for various Assam exams.
+# Assam Exam Question Bank 📚
+
+A collection of exam preparation materials for Assam students.
+
+## Available Subjects
+
+- Assam GK
+- General Science
+
+## Upcoming Categories
+
+- Assam TET
+- D.El.Ed PET
+- Assamese Grammar
+- English Grammar
+- Competitive Exam MCQ
