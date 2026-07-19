@@ -1,24 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <h1>🎯 Admin Dashboard</h1>
 
-<p>Welcome Admin</p>
+<h2>📚 Add GK Question</h2>
 
-<button>Add GK</button>
-
-<br><br>
-
-<button>Upload PDF</button>
+<input type="text" id="question" placeholder="Enter Question">
 
 <br><br>
 
-<button>Add Question</button>
+<input type="text" id="answer" placeholder="Enter Answer">
+
+<br><br>
+
+<button onclick="addGK()">Save GK</button>
+
+<p id="message"></p>
+
+
+<script type="module">
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getFirestore, collection, addDoc } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBB9d2kTvkduiO4q04sqYnnQipZIRXR_3M",
+
+authDomain: "purnima-abac5.firebaseapp.com",
+
+projectId: "purnima-abac5",
+
+storageBucket: "purnima-abac5.firebasestorage.app",
+
+messagingSenderId: "417481278997",
+
+appId: "1:417481278997:web:5ac4253d32be0b3a21f01c"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+window.addGK = async function(){
+
+let question = document.getElementById("question").value;
+
+let answer = document.getElementById("answer").value;
+
+
+await addDoc(collection(db,"gk"),{
+
+question: question,
+
+answer: answer
+
+});
+
+
+document.getElementById("message").innerHTML =
+"✅ GK Saved Successfully";
+
+
+}
+
+
+</script>
+
 
 </body>
 </html>
