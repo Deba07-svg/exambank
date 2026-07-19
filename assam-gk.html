@@ -2,20 +2,104 @@
 <html>
 <head>
 <title>Assam GK</title>
+
+<style>
+.question-box{
+    border:1px solid #ccc;
+    padding:15px;
+    margin:15px;
+    border-radius:10px;
+}
+</style>
+
 </head>
+
 <body>
 
 <h1>Assam GK</h1>
 
-<h3>1. অসমৰ ৰাজধানী কি?</h3>
-<p>A) যোৰহাট</p>
-<p>B) দিছপুৰ ✅</p>
-<p>C) ডিব্ৰুগড়</p>
-<p>D) শিৱসাগৰ</p>
+<div id="questionList">
+Loading Questions...
+</div>
+
 
 <br><br>
+
 <a href="index.html">
 <button>🏠 Home</button>
 </a>
+
+
+<script type="module">
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getFirestore, collection, query, where, getDocs } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// আপোনাৰ Firebase Config ইয়াত লগাব
+const firebaseConfig = {
+
+apiKey: "আপোনাৰ_apiKey",
+authDomain: "আপোনাৰ_project.firebaseapp.com",
+projectId: "আপোনাৰ_project_id",
+storageBucket: "আপোনাৰ_project.appspot.com",
+messagingSenderId: "আপোনাৰ_sender_id",
+appId: "আপোনাৰ_app_id"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+// Firestore ৰ পৰা Assam GK আনিব
+
+const q = query(
+collection(db,"questions"),
+where("category","==","Assam GK")
+);
+
+
+const snapshot = await getDocs(q);
+
+
+let html = "";
+
+
+snapshot.forEach((doc)=>{
+
+let data = doc.data();
+
+
+html += `
+
+<div class="question-box">
+
+<h3>${data.question}</h3>
+
+<p>A) ${data.optionA}</p>
+<p>B) ${data.optionB}</p>
+<p>C) ${data.optionC}</p>
+<p>D) ${data.optionD}</p>
+
+<b>উত্তৰ: ${data.answer}</b>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("questionList").innerHTML = html;
+
+
+</script>
+
 </body>
 </html>
