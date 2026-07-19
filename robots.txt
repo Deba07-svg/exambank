@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://deba07-svg.github.io/exambank/sitemap.xml
