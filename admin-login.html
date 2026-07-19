@@ -1,22 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Admin Login</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <h1>🔐 Admin Login</h1>
 
-<input type="email" placeholder="Email">
+<input type="email" id="email" placeholder="Email">
 
 <br><br>
 
-<input type="password" placeholder="Password">
+<input type="password" id="password" placeholder="Password">
 
 <br><br>
 
-<button>Login</button>
+<button onclick="login()">Login</button>
+
+<p id="message"></p>
+
+
+<script type="module">
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getAuth, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBB9d2kTvkduiO4q04sqYnnQipZIRXR_3M",
+
+authDomain: "purnima-abac5.firebaseapp.com",
+
+projectId: "purnima-abac5",
+
+storageBucket: "purnima-abac5.firebasestorage.app",
+
+messagingSenderId: "417481278997",
+
+appId: "1:417481278997:web:5ac4253d32be0b3a21f01c"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+window.login = function(){
+
+let email = document.getElementById("email").value;
+
+let password = document.getElementById("password").value;
+
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then(()=>{
+
+document.getElementById("message").innerHTML =
+"✅ Login Successful";
+
+window.location.href="admin-dashboard.html";
+
+})
+
+.catch((error)=>{
+
+document.getElementById("message").innerHTML =
+"❌ Wrong Email or Password";
+
+});
+
+}
+
+</script>
+
 
 </body>
 </html>
